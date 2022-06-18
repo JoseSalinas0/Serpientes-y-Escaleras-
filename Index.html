@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body background="fondo.gif" style="background-repeat: no-repeat; background-size: cover;">
+    <img src="tablero.png">
+    <script src="Funciones.js"></script>
+    <div>
+        <button id="Dado" style="top: 275px; left: 90%; width: 72px; height: 72px; position: fixed; background-image: url('d1n.png'); background-repeat: no-repeat;"></button>
+        <img src="J1.png" id="j1" style="width: 21; height: 30; top: 0; left: 0; position: fixed; z-index: 1; margin-top: 530px;">
+        <img src="J2.png" id="j2" style="width: 21; height: 30; top: 0; left: 0; position: fixed; z-index: 1; margin-top: 570px;">
+    </div>
+</body> 
+<script>
+    //variables
+    var posicionJ1=0;
+    var posicionJ2=0;
+    let aux;
+    var aux2;
+    var mov;
+    var tab=[];
+    var jug1=document.getElementById('j1');
+    var jug2=document.getElementById('j2');
+    var j1=true;
+    var ganador=false;
+    const music = new Audio('canelitaOwO.mp3');
+    music.play();
+    music.loop =true;
+    a1=document.getElementById('Dado');
+    alert("¡¡¡Bienvenido al juego de Serpientes y escaleras!!!\nInstrucciones:\nCada jugador tendra un turno en el que tirara el dado y depende del número su pieza avanzara");
+    alert("Gana el primero en llegar a la casilla 54\nSi caes en la cabeza de la serpiente caeras hasta llegar a su cola\nSi tocas el inicio de una escalera podras subir");
+    var n1 = prompt("Ingrese el nombre del jugador 1");
+    var n2 = prompt("Ingrese el nombre del jugador 2");
+    setTimeout(function(){ alert("Es el turno de "+n1+" (el negro)\nToque el dado");   }, 300);
+    tabla();
+
+    a1.addEventListener('click',function(){
+        if(j1==true){
+            if(ganador!=true){
+                let cant = Math.floor(Math.random()*(6)+1);
+                dadoNegro(cant);
+                alert("Te salio: "+cant);
+                ganador=moverJ1(cant);
+                if(ganador==true){
+                    alert("Feliciades ha ganado "+n1);
+                }else{
+                    setTimeout(function(){ alert("Es el turno de "+n2+" (el blanco)\nToque el dado");   }, 300);
+                }
+                j1=false;
+            }
+        }else{
+            if(ganador!=true){
+                cant = Math.floor(Math.random()*(6)+1);
+                dadoBlanco(cant);
+                alert("Te salio: "+cant);
+                ganador=moverJ2(cant);
+                if(ganador==true){
+                    alert("Feliciades ha ganado "+n2);
+                }else{
+                    setTimeout(function(){ alert("Es el turno de "+n1+" (el negro)\nToque el dado");   }, 300);
+                }
+                j1=true;
+            }
+        }
+    });
+    
+</script>
+</html>
